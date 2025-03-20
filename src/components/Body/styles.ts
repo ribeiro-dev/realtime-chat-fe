@@ -10,11 +10,17 @@ export const Container = styled.div`
   justify-content: space-between;
   min-height: 100vh;
 
-  padding: 24px 0;
+  padding: 24px 16px;
 `;
 
 export const MessagesContainer = styled.div`
   flex: 1;
+  padding: 20px 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 20px;
 `;
 
 export const MessageInput = styled.div`

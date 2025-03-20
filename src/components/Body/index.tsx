@@ -1,9 +1,23 @@
+import { Message } from "../Message";
 import { Container, MessageInput, MessagesContainer } from "./styles";
 
 export function Body() {
   return (
     <Container>
-      <MessagesContainer></MessagesContainer>
+      <MessagesContainer>
+        <Message
+          user="Usuário"
+          content="Bom dia! Está podendo falar?"
+          date={new Date("2025-02-02 12:30")}
+          owner={false}
+        />
+        <Message
+          user="Eu"
+          content="Olá, bom dia! Estou sim."
+          date={new Date("2025-02-02 12:30")}
+          owner={true}
+        />
+      </MessagesContainer>
 
       <MessageInput>
         <form>
