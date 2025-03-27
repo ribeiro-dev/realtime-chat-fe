@@ -4,6 +4,7 @@ import { Message } from "../Message";
 import { MessageForm } from "../MessageForm";
 
 import { Container, MessagesContainer } from "./styles";
+import { messages } from "../../mocks/messages";
 
 export function Body() {
   function sendMessage(e: FormEvent) {
@@ -14,22 +15,17 @@ export function Body() {
   return (
     <Container>
       <MessagesContainer>
-        <Message
-          user="Usuário"
-          content="Bom dia! Está podendo falar?"
-          date={new Date("2025-02-02 12:30")}
-          owner={false}
-        />
-        <Message
-          user="Eu"
-          content="Olá, bom dia! Estou sim."
-          date={new Date("2025-02-02 12:30")}
-          owner={true}
-        />
+        {messages.map(({ user, content, date, owner }) => (
+            <Message
+              user={user}
+              content={content}
+              date={date}
+              owner={owner}
+            />
+        ))}
       </MessagesContainer>
 
       <MessageForm onSubmit={sendMessage} />
-
     </Container>
   );
 }
