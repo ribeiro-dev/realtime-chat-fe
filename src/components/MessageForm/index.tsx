@@ -6,7 +6,7 @@ interface MessageFormProps {
 }
 
 export function MessageForm({ onSubmit }: MessageFormProps) {
-  const [newMessage, setNewMessage] = useState<string|null>(null);
+  const [newMessage, setNewMessage] = useState<string>("");
 
   return (
 
@@ -18,6 +18,7 @@ export function MessageForm({ onSubmit }: MessageFormProps) {
           name="new-message"
           placeholder="Digite sua mensagem aqui"
           onChange={e => setNewMessage(e.target.value)}
+          value={newMessage}
         />
         <button title="Enviar mensagem">
           <svg

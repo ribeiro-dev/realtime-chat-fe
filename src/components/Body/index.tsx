@@ -1,22 +1,64 @@
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { Message } from "../Message";
 import { MessageForm } from "../MessageForm";
 
 import { Container, MessagesContainer } from "./styles";
-import { messages } from "../../mocks/messages";
+import { socket } from "../../socket";
+
+interface Message {
+  id: number
+  user: string
+  content: string
+  date: string
+  owner: boolean
+}
 
 export function Body() {
+  const [messages, setMessages] = useState<Message[]>([]);
+
   function sendMessage(e: FormEvent) {
     e.preventDefault();
-    alert('Message sent');
+    const form = e.target as HTMLFormElement;
+    const value = (form[0] as HTMLInputElement).value.trim(); // handles the .value error
+    (form[0] as HTMLInputElement).value = '';
+
+
+    const newMessage: Message = {
+      id: new Date().getTime(), // temporary id
+      user: socket.id!,
+      content: value,
+      date: Date.now().toLocaleString(),
+      owner: false
+    }
+    socket.emit('messages@new', newMessage)
+
+    setMessages(prevState => {
+      return [...prevState, newMessage]
+    })
   }
+
+  // Socket Listeners
+  useEffect(() => {
+    socket.on("getMessages", (data) => {
+      setMessages(data);
+    });
+
+    socket.on('messages@new', (data) => {
+      console.log("Mensagem recebida")
+      setMessages(prevState => {
+        return [...prevState, data]
+      })
+    })
+  }, [])
+
 
   return (
     <Container>
       <MessagesContainer>
-        {messages.map(({ user, content, date, owner }) => (
+        {messages.map(({ id, user, content, date, owner }) => (
             <Message
+              key={id}
               user={user}
               content={content}
               date={date}

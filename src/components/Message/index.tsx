@@ -3,7 +3,7 @@ import { Content, Container, User, Date } from "./styles";
 interface MessageProps {
   user: string;
   content: string;
-  date: Date;
+  date: string;
   owner: boolean; // Only to test messages sent by user
 }
 
@@ -17,7 +17,7 @@ export function Message({ user, content, date, owner }: MessageProps) {
         {content}
       </Content>
       <Date>
-        {date.getHours()}:{date.getMinutes()}
+        {date}
       </Date>
     </Container>
   );
