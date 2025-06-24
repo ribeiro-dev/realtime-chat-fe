@@ -21,7 +21,6 @@ export function Body() {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const value = (form[0] as HTMLInputElement).value.trim(); // handles the .value error
-    (form[0] as HTMLInputElement).value = '';
 
 
     const newMessage: Message = {
@@ -29,7 +28,7 @@ export function Body() {
       user: socket.id!,
       content: value,
       date: Date.now().toLocaleString(),
-      owner: false
+      owner: true
     }
     socket.emit('messages@new', newMessage)
 
@@ -45,7 +44,6 @@ export function Body() {
     });
 
     socket.on('messages@new', (data) => {
-      console.log("Mensagem recebida")
       setMessages(prevState => {
         return [...prevState, data]
       })

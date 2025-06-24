@@ -8,10 +8,15 @@ interface MessageFormProps {
 export function MessageForm({ onSubmit }: MessageFormProps) {
   const [newMessage, setNewMessage] = useState<string>("");
 
+  function handleSubmit(e: FormEvent) {
+    onSubmit(e)
+    setNewMessage("")
+  }
+
   return (
 
     <FormContainer>
-      <form onSubmit={e => onSubmit(e)}>
+      <form onSubmit={e => handleSubmit(e)}>
         <label htmlFor="new-message" hidden>Nova Mensagem</label>
         <input
           type="text"
