@@ -3,23 +3,36 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   max-width: 1440px;
+  height: 100vh;
   margin: auto;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  gap: 10px;
+
+  overflow: hidden;
 
   padding: 24px 16px;
 `;
 
 export const MessagesContainer = styled.div`
   flex: 1;
-  padding: 20px 0;
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 20px;
+
+  overflow: hidden;
 `;
 
+export const MessagesWrapper = styled.div`
+  flex: 1;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 20px;
+
+  gap: 20px;
+`;

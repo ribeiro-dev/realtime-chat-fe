@@ -3,13 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
   min-width: 200px;
   max-width: 500px;
-  min-height: 80px;
+
   padding: 10px 12px;
   border-radius: 10px;
 
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  word-break: break-all;
 
   &.another {
     background: #2e333d;
@@ -31,12 +29,15 @@ export const User = styled.p`
 export const Content = styled.p`
   font-size: 14px;
   font-weight: 500;
+
+  margin: 10px 0 16px;
 `
 
 export const Date = styled.p`
   font-size: 10px;
   color: #63676d;
   align-self: self-end;
+  text-align: right;
 
   ${Container}.user & {
     color: white;
