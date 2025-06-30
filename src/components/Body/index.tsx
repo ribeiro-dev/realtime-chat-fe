@@ -1,9 +1,9 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 import { Message } from "../Message";
 import { MessageForm } from "../MessageForm";
 
-import { Container, MessagesContainer } from "./styles";
+import { Container, MessagesContainer, MessagesWrapper } from "./styles";
 import { socket } from "../../socket";
 
 interface Message {
@@ -16,6 +16,7 @@ interface Message {
 
 export function Body() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
   function sendMessage(e: FormEvent) {
     e.preventDefault();
@@ -50,19 +51,28 @@ export function Body() {
     })
   }, [])
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
 
   return (
     <Container>
       <MessagesContainer>
-        {messages.map(({ id, user, content, date, owner }) => (
-            <Message
-              key={id}
-              user={user}
-              content={content}
-              date={date}
-              owner={owner}
-            />
-        ))}
+        <MessagesWrapper>
+          {messages.map(({ id, user, content, date, owner }) => (
+              <Message
+                key={id}
+                user={user}
+                content={content}
+                date={date}
+                owner={owner}
+              />
+          ))}
+
+        {/* Only to scroll reference */}
+        <div ref={messagesEndRef} />
+        </MessagesWrapper>
       </MessagesContainer>
 
       <MessageForm onSubmit={sendMessage} />
