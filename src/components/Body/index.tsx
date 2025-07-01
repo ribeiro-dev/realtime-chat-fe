@@ -10,7 +10,7 @@ interface Message {
   id: number
   user: string
   content: string
-  date: string
+  date: Date
   owner: boolean
 }
 
@@ -28,7 +28,7 @@ export function Body() {
       id: new Date().getTime(), // temporary id
       user: socket.id!,
       content: value,
-      date: Date.now().toLocaleString(),
+      date: new Date(),
       owner: true
     }
     socket.emit('messages@new', newMessage)
@@ -65,14 +65,14 @@ export function Body() {
                 key={id}
                 user={user}
                 content={content}
-                date={date}
+                date={date.toLocaleString()}
                 owner={owner}
               />
           ))}
 
-        {/* Only to scroll reference */}
-        <div ref={messagesEndRef} />
-        </MessagesWrapper>
+          {/* Only to scroll reference */}
+          <div ref={messagesEndRef} />
+          </MessagesWrapper>
       </MessagesContainer>
 
       <MessageForm onSubmit={sendMessage} />
