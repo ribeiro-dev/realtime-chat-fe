@@ -1,10 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
-import ArchivoRegularTtf from '../assets/fonts/Archivo-Regular.ttf';
-import ArchivoMediumTtf from '../assets/fonts/Archivo-Medium.ttf';
-import ArchivoSemiBoldTtf from '../assets/fonts/Archivo-SemiBold.ttf';
-import ArchivoBoldTtf from '../assets/fonts/Archivo-Bold.ttf';
-
+import ArchivoRegularTtf from "../assets/fonts/Archivo-Regular.ttf";
+import ArchivoMediumTtf from "../assets/fonts/Archivo-Medium.ttf";
+import ArchivoSemiBoldTtf from "../assets/fonts/Archivo-SemiBold.ttf";
+import ArchivoBoldTtf from "../assets/fonts/Archivo-Bold.ttf";
 
 export const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -51,9 +50,17 @@ export const GlobalStyles = createGlobalStyle`
     color: #fff;
   }
 
-  /* button {
-    cursor: pointer;
-    font-size: 1rem;
-    color: #333;
-  } */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2e333d;
+    border-radius: 6px;
+  }
 `;
