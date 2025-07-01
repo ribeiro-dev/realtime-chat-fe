@@ -3,7 +3,12 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100vw;
   max-width: 1440px;
-  height: 100vh;
+
+  height: 100dvh;
+  @supports not (height: 100dvh) {
+    height: calc(var(--vh, 1vh) * 100);
+  }
+
   margin: auto;
 
   display: flex;
