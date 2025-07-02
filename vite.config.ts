@@ -5,6 +5,6 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    allowedHosts: ["https://realtime-chat-front.onrender.com/"],
+    allowedHosts: ["realtime-chat-front.onrender.com"],
   },
 });
