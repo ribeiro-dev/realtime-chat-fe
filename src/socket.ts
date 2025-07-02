@@ -1,5 +1,7 @@
 import socketIo from "socket.io-client";
 
-export const socket = socketIo("http://localhost:3000", {
+const websocketHost = import.meta.env.VITE_WEBSOCKET_HOST
+
+export const socket = socketIo(`${websocketHost}`, {
   transports: ["websocket"],
 });
