@@ -40,15 +40,31 @@ export function Body() {
 
   // Socket Listeners
   useEffect(() => {
-    socket.on("getMessages", (data) => {
-      setMessages(data);
-    });
+    const getMessages = (data: Message[]) => {
+      const formattedData = data.map((message: Message) => {
+        message.date = new Date(message.date)
 
-    socket.on('messages@new', (data) => {
+        return message
+      })
+      setMessages(formattedData);
+
+      console.log(data)
+    }
+
+    const getNewMessage = (data: Message) => {
       setMessages(prevState => {
+        data.date = new Date(data.date)
         return [...prevState, data]
       })
-    })
+    }
+
+    socket.on("getMessages", getMessages)
+    socket.on('messages@new', getNewMessage)
+
+    return () => {
+      socket.off("getMessages", getMessages)
+      socket.off("messages@new", getNewMessage)
+    }
   }, [])
 
   useEffect(() => {
