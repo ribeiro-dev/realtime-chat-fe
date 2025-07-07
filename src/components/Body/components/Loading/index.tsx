@@ -4,7 +4,7 @@ export function Loading() {
   return (
     <div style={{ margin: "auto", textAlign: "center" }}>
       <Spinner />
-      <p>Conectando...</p>
+      <p style={{ fontWeight: "bold" }}>Conectando...</p>
     </div>
   );
 }
