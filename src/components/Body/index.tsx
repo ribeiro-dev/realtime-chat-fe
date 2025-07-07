@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 
 import { Message } from "../Message";
 import { MessageForm } from "../MessageForm";
+import { Loading } from "./components/Loading";
 
 import { Container, MessagesContainer, MessagesWrapper } from "./styles";
 import { socket } from "../../socket";
@@ -74,22 +75,28 @@ export function Body() {
 
   return (
     <Container>
-      <MessagesContainer>
-        <MessagesWrapper>
-          {messages.map(({ id, user, content, date, owner }) => (
-              <Message
-                key={id}
-                user={user}
-                content={content}
-                date={date.toLocaleString()}
-                owner={owner}
-              />
-          ))}
+      {!socket.connected
+        ? (
+          <Loading />
+        ) : (
+          <MessagesContainer>
+            <MessagesWrapper>
+              {messages.map(({ id, user, content, date, owner }) => (
+                <Message
+                  key={id}
+                  user={user}
+                  content={content}
+                  date={date.toLocaleString()}
+                  owner={owner}
+                />
+              ))}
 
-          {/* Only to scroll reference */}
-          <div ref={messagesEndRef} />
-          </MessagesWrapper>
-      </MessagesContainer>
+              {/* Only to scroll reference */}
+              <div ref={messagesEndRef} />
+              </MessagesWrapper>
+          </MessagesContainer>
+        )
+      }
 
       <MessageForm onSubmit={sendMessage} />
     </Container>
