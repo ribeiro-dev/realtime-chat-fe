@@ -1,11 +1,11 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 
-import { Message } from "../Message";
-import { MessageForm } from "../MessageForm";
+import { Message } from "./components/Message";
+import { MessageForm } from "./components/MessageForm";
 import { Loading } from "./components/Loading";
 
 import { Container, MessagesContainer, MessagesWrapper } from "./styles";
-import { socket } from "../../socket";
+import { socket } from "../../../../socket";
 
 interface Message {
   id: number
