@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Message } from "./components/Message";
 import { MessageForm } from "./components/MessageForm";
@@ -8,29 +9,32 @@ import { Container, MessagesContainer, MessagesWrapper } from "./styles";
 import { socket } from "../../../../socket";
 
 interface Message {
-  id: number
+  id: string
   user: string
   content: string
   date: Date
-  owner: boolean
 }
 
 export function Body() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [username, setUsername] = useState<string>("");
+
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
+  const navigate = useNavigate()
 
   function sendMessage(e: FormEvent) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const value = (form[0] as HTMLInputElement).value.trim(); // handles the .value error
 
+    const messageDate = new Date()
+    const messageId = socket.id! + messageDate.getTime()
 
     const newMessage: Message = {
-      id: new Date().getTime(), // temporary id
-      user: socket.id!,
+      id: messageId,
+      user: username,
       content: value,
-      date: new Date(),
-      owner: true
+      date: messageDate,
     }
     socket.emit('messages@new', newMessage)
 
@@ -38,6 +42,16 @@ export function Body() {
       return [...prevState, newMessage]
     })
   }
+
+  useEffect(() => {
+    const user = localStorage.getItem("username")
+    if (!user) {
+      navigate("/")
+      return
+    }
+
+    setUsername(user)
+  }, [navigate])
 
   // Socket Listeners
   useEffect(() => {
@@ -81,13 +95,13 @@ export function Body() {
         ) : (
           <MessagesContainer>
             <MessagesWrapper>
-              {messages.map(({ id, user, content, date, owner }) => (
+              {messages.map(({ id, user, content, date }) => (
                 <Message
                   key={id}
                   user={user}
                   content={content}
                   date={date.toLocaleString()}
-                  owner={owner}
+                  owner={user == username}
                 />
               ))}
 

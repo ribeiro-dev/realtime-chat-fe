@@ -1,7 +1,8 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { useViewportHeight } from './hooks/useViewportHeight';
-import { GlobalStyles } from './styles/GlobalStyles'
-import { Chat } from './pages/Chat';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useViewportHeight } from "./hooks/useViewportHeight";
+import { GlobalStyles } from "./styles/GlobalStyles";
+import { Chat } from "./pages/Chat";
+import { Login } from "./pages/Login";
 
 function App() {
   useViewportHeight();
@@ -12,11 +13,12 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path='/chat' element={<Chat />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/chat" element={<Chat />} />
         </Routes>
       </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
