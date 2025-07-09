@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "../../components/Button";
+
 export function Login() {
   const [username, setUsername] = useState("");
   const navigate = useNavigate()
@@ -50,19 +52,9 @@ export function Login() {
             autoComplete="off"
             type="text"
           />
-
-          <br />
-          <button
-            style={{
-              width: "100%",
-              height: "40px",
-              borderRadius: "6px",
-              cursor: "pointer",
-              fontSize: "14px",
-            }}
-          >
+          <Button handleClick={e => handleSubmit(e)}>
             Continuar
-          </button>
+          </Button>
         </form>
       </div>
     </>
