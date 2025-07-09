@@ -10,9 +10,11 @@ export function Login() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (username.trim()) {
-      navigate('/chat')
-    }
+    const user = username.trim()
+    if (!user.length) return
+
+    localStorage.setItem("username", username)
+    navigate('/chat')
   }
 
   return (

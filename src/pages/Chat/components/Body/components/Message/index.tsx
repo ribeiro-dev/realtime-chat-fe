@@ -4,7 +4,7 @@ interface MessageProps {
   user: string;
   content: string;
   date: string;
-  owner: boolean; // Only to test messages sent by user
+  owner: boolean;
 }
 
 export function Message({ user, content, date, owner }: MessageProps) {
