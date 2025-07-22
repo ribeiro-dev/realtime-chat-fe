@@ -20,11 +20,15 @@ export function Chat() {
   function sendMessage(e: React.FormEvent) {
     e.preventDefault();
 
+    if (!socket) {
+      return;
+    }
+
     const form = e.target as HTMLFormElement;
     const value = (form[0] as HTMLInputElement).value.trim(); // handles the .value error
 
     const messageDate = new Date();
-    const messageId = socket.id + messageDate.getTime();
+    const messageId = socket.id! + messageDate.getTime();
 
     const newMessage: Message = {
       id: messageId,
